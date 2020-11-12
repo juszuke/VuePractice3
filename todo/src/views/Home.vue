@@ -81,8 +81,8 @@ export default {
       types.DELETE_TODO
     ]),
     createTask () {
-      var comment = this.$refs.comment
-      let item = {
+      const comment = this.$refs.comment
+      const item = {
         comment: comment.value
       }
       this.$store.dispatch(types.ADD_TODO, item.comment)
