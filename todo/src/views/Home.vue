@@ -23,12 +23,12 @@
           <th>{{ item.id }}</th>
           <td>{{ item.comment }}</td>
           <td class="state">
-            <button v-on:click="CHANGE_STATE(item.id)">
+            <button v-on:click="changeState(item.id)">
               {{ labels[item.state] }}
             </button>
           </td>
           <td class="button">
-            <button v-on:click="DELETE_TODO(item.id)">
+            <button v-on:click="deleteTodo(item.id)">
               削除
             </button>
           </td>
@@ -46,7 +46,6 @@
 
 <script>
 import { mapState,mapActions } from 'vuex'
-import * as types from '@/store/mutation-types'
 
 export default {
   data() {
@@ -76,16 +75,16 @@ export default {
 
   methods: {
     ...mapActions([
-      types.ADD_TODO,
-      types.CHANGE_STATE,
-      types.DELETE_TODO
+      'addTodo',
+      'changeState',
+      'deleteTodo'
     ]),
     createTask () {
       const comment = this.$refs.comment
       const item = {
         comment: comment.value
       }
-      this.$store.dispatch(types.ADD_TODO, item.comment)
+      this.$store.dispatch('addTodo', item.comment)
       comment.value = ''
     }
   }

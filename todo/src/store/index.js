@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as types from './mutation-types'
 
 Vue.use(Vuex)
 
@@ -16,7 +15,7 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    [types.ADD_TODO] (state, comment) {
+    addTodo (state, comment) {
       const item = {
         id: state.sequence,
         comment: comment,
@@ -25,7 +24,7 @@ export default new Vuex.Store({
       state.todos.push(item);
       state.sequence++;
     },
-    [types.CHANGE_STATE] (state, id) {
+    changeState (state, id) {
       const index = state.todos.findIndex(item => item.id === id);
       if (state.todos[index].state === 0) {
         state.todos[index].state = 1
@@ -33,21 +32,21 @@ export default new Vuex.Store({
         state.todos[index].state = 0
       }
     },
-    [types.DELETE_TODO] (state, id) {
+    deleteTodo (state, id) {
       const index = state.todos.findIndex(task => task.id === id);
       state.todos.splice(index, 1);
     }
   },
   
   actions: {
-    [types.ADD_TODO] ({ commit }, comment) {
-      commit (types.ADD_TODO, comment)
+    addTodo ({ commit }, comment) {
+      commit ('addTodo', comment)
     },
-    [types.CHANGE_STATE] ({ commit }, id) {
-      commit (types.CHANGE_STATE, id)
+    changeState ({ commit }, id) {
+      commit ('changeState', id)
     },
-    [types.DELETE_TODO] ({ commit }, id) {
-      commit (types.DELETE_TODO, id)
+    deleteTodo ({ commit }, id) {
+      commit ('deleteTodo', id)
     }
   }
 })
